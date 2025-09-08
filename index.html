@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile Card</title>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --card: #0f1720;
+      --muted: #8aa0b2;
+      --text: #e6eef6;
+      --primary: #4f9cf9;
+      --ring: #6bb4ff66;
+      --chip: #132234;
+      --chip-border: #1e3147;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f3f6fa;
+        --card: #ffffff;
+        --muted: #5b6b79;
+        --text: #0f1720;
+        --primary: #2563eb;
+        --ring: #2563eb33;
+        --chip: #f1f5ff;
+        --chip-border: #dbe7ff;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      background: radial-gradient(1000px 600px at 10% -20%, #1a2840 0%, transparent 60%),
+                  radial-gradient(900px 500px at 110% 0%, #2a203a 0%, transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card{
+      width: min(420px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)) padding-box,
+                  radial-gradient(120% 120% at 0% 0%, #4f9cf922, transparent 60%) border-box,
+                  var(--card);
+      border: 1px solid #ffffff1a;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .cover{
+      height: 120px;
+      background: conic-gradient(from 180deg at 70% 20%, #4f9cf9, #22d3ee, #a78bfa, #4f9cf9);
+      filter: saturate(1.1);
+      position: relative;
+      isolation: isolate;
+    }
+    .cover::after{
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, #0000, #0004);
+    }
+
+    .content{ padding: 18px 18px 20px; }
+
+    .row{ display: flex; gap: 14px; align-items: center; }
+    .avatar-wrap{ margin-top: -42px; position: relative; }
+    .avatar{
+      width: 84px; height: 84px; border-radius: 50%;
+      border: 3px solid #ffffff20; outline: 3px solid #00000022;
+      overflow: hidden;
+    }
+    .avatar img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .id{ flex: 1; min-width: 0; }
+    .name{ font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+    .role{ color: var(--muted); font-size: 0.95rem; margin-top: 2px; }
+
+    .bio{ margin: 12px 0 14px; color: var(--text); opacity: .9; line-height: 1.45; }
+
+    .chips{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .chip{
+      font-size: 0.85rem; padding: 6px 10px; border-radius: 999px;
+      background: var(--chip); border: 1px solid var(--chip-border);
+    }
+
+    .actions{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn{
+      padding: 10px 12px; border-radius: 12px; border: 1px solid #ffffff1a;
+      background: linear-gradient(180deg, #ffffff10, #00000000);
+      color: var(--text); font-weight: 600; text-decoration: none; text-align: center;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      transition: transform .05s ease-in-out, box-shadow .15s ease, background .2s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{ background: linear-gradient(180deg, var(--primary), #2563eb); color: white; border-color: transparent; }
+    .btn:focus-visible{ outline: none; box-shadow: 0 0 0 6px var(--ring); }
+
+    .stats{
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px;
+    }
+    .stat{
+      background: #ffffff08; border: 1px solid #ffffff12; border-radius: 12px; padding: 10px;
+      text-align: center;
+    }
+    .stat .val{ font-weight: 800; font-size: 1.1rem; }
+    .stat .lbl{ color: var(--muted); font-size: .8rem; margin-top: 2px; }
+
+    .social{ display: flex; gap: 10px; margin-top: 14px; }
+    .icon-btn{ width: 40px; height: 40px; border-radius: 12px; border: 1px solid #ffffff1a; display:grid; place-items:center; text-decoration:none; }
+    .icon-btn svg{ width: 20px; height: 20px; fill: currentColor; color: var(--text); opacity: .9; }
+
+    @media (max-width: 360px){
+      .name{ font-size: 1.1rem; }
+      .avatar{ width: 72px; height: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <article class="card" role="region" aria-label="Profile card">
+    <div class="cover" aria-hidden="true"></div>
+
+    <div class="content">
+      <div class="row">
+        <div class="avatar-wrap">
+          <div class="avatar" aria-label="Avatar">
+            <img src="perusu.jpg" alt="Profile Photo">
+          </div>
+        </div>
+        <div class="id">
+          <div class="name">PERIYSAMY</div>
+          <div class="role">Aspiring BBA student</div>
+        </div>
+      </div>
+
+      <p class="bio">Specialising in supplychain management,Shaping tomorrow's business world.</p>
+
+      <div class="chips" aria-label="Skills">
+        
+        <span class="chip">Management</span>
+        <span class="chip">Accounting</span>
+        <span class="chip">Communication</span>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="mailto:pperiyasamip@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="m22 6-10 7L2 6"/></svg>
+          Email
+        </a>
+        <a class="btn" href="#" aria-label="Download Resume" download>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Resume
+        </a>
+      </div>
+
+      <div class="stats" aria-label="Stats">
+        <div class="stat"><div class="val">UG</div><div class="lbl">In Progress</div></div>
+        <div class="stat"><div class="val">0</div><div class="lbl">Projects</div></div>
+        <div class="stat"><div class="val">0</div><div class="lbl">Internships</div></div>
+      </div>
+
+      <div class="social" aria-label="Social links">
+        <a class="icon-btn" href="https://www.linkedin.com/in/periyasamy7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8.98h5V24H0zM8.98 8.98H14v2.05h.07c.7-1.33 2.42-2.73 4.98-2.73C23.4 8.3 24 12.02 24 16.76V24h-5v-6.22c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.61-2.38 3.27V24H8.98z"/></svg>
+        </a>
+        <a class="icon-btn" href="https://www.instagram.com/its_me_saamy_7?igsh=cGliZmN6aXdpa2Z1" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm5 2.5A5.5 5.5 0 1 0 17.5 12 5.5 5.5 0 0 0 12 6.5zm0 2A3.5 3.5 0 1 1 8.5 12 3.5 3.5 0 0 1 12 8.5zM18 5a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <script>
+    document.querySelectorAll('.btn, .icon-btn').forEach(el => {
+      el.addEventListener('click', e => {
+        const r = document.createElement('span');
+        const rect = el.getBoundingClientRect();
+        const d = Math.max(rect.width, rect.height);
+        r.style.cssText = `position:absolute;left:${e.clientX-rect.left-d/2}px;top:${e.clientY-rect.top-d/2}px;width:${d}px;height:${d}px;border-radius:999px;background:#ffffff22;pointer-events:none;transform:scale(0);opacity:1;transition:.5s;`;
+        el.style.position = 'relative';
+        el.appendChild(r);
+        requestAnimationFrame(()=>{ r.style.transform='scale(1)'; r.style.opacity='0';});
+        setTimeout(()=> r.remove(), 500);
+      });
+    });
+  </script>
+</body>
+</html>
